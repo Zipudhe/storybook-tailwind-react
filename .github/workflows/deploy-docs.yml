@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 15
       # npm ci faz instalação das dependências sem procurar atualizações e sem atualizar o package.lock
-      - run: npm ci --force
+      - run: npm ci --legacy-peer-deps
 
       - run: npm run build-storybook
 
