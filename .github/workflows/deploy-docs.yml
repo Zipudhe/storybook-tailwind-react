@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 15
+          node-version: 16
       # npm ci faz instalação das dependências sem procurar atualizações e sem atualizar o package.lock
       - run: npm ci --legacy-peer-deps
 
