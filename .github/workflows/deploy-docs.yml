@@ -1,6 +1,6 @@
-name: Deploy storybok
+name: Deploy Storybook
 
-on: 
+on:
   push:
     branches:
       - main
@@ -11,18 +11,20 @@ jobs:
 
     steps:
       - name: Checkout
-        # actions é uma ferramento do próprio github para pegar o código mais atualizado do projeto
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      # npm ci faz instalação das dependências sem procurar atualizações e sem atualizar o package.lock
-      - run: npm ci --legacy-peer-deps
 
-      - run: npm run build-storybook
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
-      - run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Deploy Storybook
+        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
